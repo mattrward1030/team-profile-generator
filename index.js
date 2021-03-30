@@ -72,8 +72,8 @@ const addManager = () => {
             const officeNum = data.officeNum
             const teamMate = new Manager(name, email, id, officeNum)
             teamArray.push(teamMate)
-            // addManager();
-        })
+            addTeamMates();
+        });
 
     console.log(data.name);
     console.log(data.email);
@@ -81,4 +81,35 @@ const addManager = () => {
 
 
 }
+
+const addTeamMates = () => {
+
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "Does your team contain other members?",
+                choices: ["We have an engineer", "We have an unpaid intern", "This is a one person opperation"],
+                name: "newTeamMate"
+
+            }
+        ])
+        .then((data) => {
+            switch (data.newTeamMate) {
+                case "We have an engineer":
+                    addEngineer();
+                    break;
+
+                case "We have an intern":
+                    addIntern();
+                    break;
+                case "This is a one person opperation":
+                    makeTeam();
+                    break;
+            }
+        });
+}
+
+
+
 init()
