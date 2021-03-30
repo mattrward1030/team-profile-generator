@@ -229,6 +229,8 @@ const addIntern = () => {
 
 }
 
-
+const makeTeam = () => {
+    console.log("Your team is complete")
+}
 
 init()
