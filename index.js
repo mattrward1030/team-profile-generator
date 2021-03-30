@@ -1,156 +1,84 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const managerQ = [
+const Employee = require("./lib/employee")
+const Engineer = require("./lib/engineer")
+const Intern = require("./lib/intern")
+const Manager = require("./lib/manager")
 
-    {
-        type: 'input',
-        message: 'What is the team manager name?',
-        name: 'name',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a name!")
-            }
-            return true;
+
+let teamArray = [];
+
+const init = () => {
+    inquirer.prompt([
+        {
+            message: "What is the name of your team?",
+            name: "teamname"
         }
-    },
+    ])
 
-    {
-        type: 'input',
-        message: 'Please enter the manager id number',
-        name: 'number',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter the manager's id number!")
-            }
-            return true;
-        }
-    },
+        .then((data) => {
+            const team = data.teamname
+            teamArray.push(team)
+            addManager();
+        })
+}
 
-    {
-        type: "input",
-        message: "Please enter the manager's email address",
-        name: "email",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter an email address!")
-            }
-            return true;
-        }
-    },
+const addManager = () => {
 
-    {
-        type: "input",
-        message: "Please enter the manager's office number",
-        name: "officeNum",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a office number!")
-            }
-            return true;
-        }
-    },
-]
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the team manager name?',
+                name: 'name',
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter a name!")
+                    }
+                    return true;
+                }
+            },
 
-const engineerQ = [
+            {
+                type: "input",
+                message: "Please enter the manager's email address",
+                name: "email",
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter an email address!")
+                    }
+                    return true;
+                }
+            },
 
-    {
-        type: "input",
-        message: "What is the team engineer's name?",
-        name: "name",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a name!")
-            }
-            return true;
-        }
-    },
+            {
+                type: "input",
+                message: "Please enter the manager's office number",
+                name: "officeNum",
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter a office number!")
+                    }
+                    return true;
+                }
+            },
 
-    {
-        type: 'input',
-        message: "Please enter the engineer's id number",
-        name: 'number',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter the engineer's id number!")
-            }
-            return true;
-        }
-    },
+        ])
 
-    {
-        type: "input",
-        message: "Please enter the engineer's email address",
-        name: "email",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter an email address!")
-            }
-            return true;
-        }
-    },
+        .then((data) => {
+            const name = data.name
+            const email = data.email
+            const officeNum = data.officeNum
+            const teamMate = new Manager(name, email, id, officeNum)
+            teamArray.push(teamMate)
+            // addManager();
+        })
 
-    {
-        type: "input",
-        message: "Please enter the engineer's Github username",
-        name: "username",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a username!")
-            }
-            return true;
-        }
-    },
-]
+    console.log(data.name);
+    console.log(data.email);
+    console.log(data.officeNum);
 
 
-const internrQ = [
-
-    {
-        type: "input",
-        message: "What is the team interns's name?",
-        name: "name",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a name!")
-            }
-            return true;
-        }
-    },
-
-    {
-        type: 'input',
-        message: "Please enter the intern's id number",
-        name: 'number',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter the intern's id number!")
-            }
-            return true;
-        }
-    },
-
-    {
-        type: "input",
-        message: "Please enter the interns's email address",
-        name: "email",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter an email address!")
-            }
-            return true;
-        }
-    },
-
-    {
-        type: "input",
-        message: "Please enter the interns's school",
-        name: "school",
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("Need to enter a school!")
-            }
-            return true;
-        }
-    },
-]
+}
+init()
