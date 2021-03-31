@@ -1,19 +1,53 @@
 const Engineer = require("../lib/Engineer");
 
-test("Can set GitHUb account via constructor", () => {
-    const testValue = "GitHubUser";
-    const object = new Engineer("Morgan", 1, "test@test.com", testValue);
-    expect(object.github).toBe(testValue);
-});
+describe("Engineer", () => {
+    describe("Initialization", () => {
+        it("Can instantiate Engineer object", () => {
+            const object = new Engineer();
+            expect(typeof (object)).toBe("object");
+        });
 
-test("getRole() should return \"Engineer\"", () => {
-    const testValue = "Engineer";
-    const object = new Engineer("Morgan", 1, "test@test.com", "GitHubUser");
-    expect(object.getRole()).toBe(testValue);
-});
+        it("Will set 'name', 'id' and 'email' when instantiated", () => {
+            const name = "Morgan";
+            const email = "Morgan@test.com";
+            const id = 1;
+            const object = new Engineer(name, email, id)
 
-test("Can get GitHub username via getGithub()", () => {
-    const testValue = "GitHubUser";
-    const object = new Engineer("Morgan", 1, "test@test.com", testValue);
-    expect(object.getGithub()).toBe(testValue);
+            expect(object.name).toEqual(name);
+            expect(object.email).toEqual(email);
+            expect(object.id).toEqual(id);
+
+        });
+    });
+
+    describe("getName", () => {
+        it("Will get the name of the object", () => {
+            const object = new Engineer("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getName()).toEqual(object.name);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Will get the email of the object", () => {
+            const object = new Engineer("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getEmail()).toEqual(object.email);
+        });
+    });
+    describe("getID", () => {
+        it("Will get the id of the object", () => {
+            const object = new Engineer("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getId()).toEqual(object.id);
+        });
+    });
+
+    describe("getRole", () => {
+        it("Will get the role of the object", () => {
+            const object = new Engineer("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getRole()).toEqual("Engineer");
+        });
+    });
 });

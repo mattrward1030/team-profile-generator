@@ -1,20 +1,62 @@
 const Manager = require("../lib/Manager");
-const Employee = require("../lib/Employee");
 
-test("Can set office number via constructor argument", () => {
-    const testValue = 100;
-    const object = new Manager("Morgan", 1, "test@test.com", testValue);
-    expect(object.officeNum).toBe(testValue);
-});
 
-test("getRole() should return \"Manager\"", () => {
-    const testValue = "Manager";
-    const object = new Manager("Morgan", 1, "test@test.com", 100);
-    expect(object.getRole()).toBe(testValue);
-});
+describe("Manager", () => {
+    describe("Initialization", () => {
+        it("Can instantiate Manager object", () => {
+            const object = new Manager();
+            expect(typeof (object)).toBe("object");
+        });
 
-test("Can get office number via getOffice()", () => {
-    const testValue = 100;
-    const object = new Manager("Morgan", 1, "test@test.com", testValue);
-    expect(object.getOfficeNum()).toBe(testValue);
+        it("Will set 'name', 'id' 'email' and office number when instantiated", () => {
+            const name = "Morgan";
+            const email = "Morgan@test.com";
+            const id = 1;
+            const officeNum = 2;
+            const object = new Manager(name, email, id, officeNum)
+
+            expect(object.name).toEqual(name);
+            expect(object.email).toEqual(email);
+            expect(object.id).toEqual(id);
+            expect(object.officeNum).toEqual(officeNum);
+
+        });
+    });
+
+    describe("getName", () => {
+        it("Will get the name of the object", () => {
+            const object = new Manager("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getName()).toEqual(object.name);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Will get the email of the object", () => {
+            const object = new Manager("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getEmail()).toEqual(object.email);
+        });
+    });
+    describe("getID", () => {
+        it("Will get the id of the object", () => {
+            const object = new Manager("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getId()).toEqual(object.id);
+        });
+    });
+    describe("getOfficeNum", () => {
+        it("Will get the office number of the object", () => {
+            const object = new Manager("Morgan", "Morgan@test.com", 1, 2)
+
+            expect(object.getOfficeNum()).toEqual(object.officeNum);
+        });
+    });
+    describe("getRole", () => {
+        it("Will get the role of the object", () => {
+            const object = new Manager("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getRole()).toEqual("Manager");
+        });
+    });
 });

@@ -1,19 +1,53 @@
 const Intern = require("../lib/Intern");
 
-test("Can set school via constructor", () => {
-    const testValue = "ND";
-    const e = new Intern("Morgan", 1, "test@test.com", testValue);
-    expect(e.school).toBe(testValue);
-});
+describe("Intern", () => {
+    describe("Initialization", () => {
+        it("Can instantiate Intern object", () => {
+            const object = new Intern();
+            expect(typeof (object)).toBe("object");
+        });
 
-test("getRole() should return \"Intern\"", () => {
-    const testValue = "Intern";
-    const e = new Intern("Morgan", 1, "test@test.com", "ND");
-    expect(e.getRole()).toBe(testValue);
-});
+        it("Will set 'name', 'id' and 'email' when instantiated", () => {
+            const name = "Morgan";
+            const email = "Morgan@test.com";
+            const id = 1;
+            const object = new Intern(name, email, id)
 
-test("Can get school via getSchool()", () => {
-    const testValue = "ND";
-    const e = new Intern("Morgan", 1, "test@test.com", testValue);
-    expect(e.getSchool()).toBe(testValue);
+            expect(object.name).toEqual(name);
+            expect(object.email).toEqual(email);
+            expect(object.id).toEqual(id);
+
+        });
+    });
+
+    describe("getName", () => {
+        it("Will get the name of the object", () => {
+            const object = new Intern("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getName()).toEqual(object.name);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Will get the email of the object", () => {
+            const object = new Intern("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getEmail()).toEqual(object.email);
+        });
+    });
+    describe("getID", () => {
+        it("Will get the id of the object", () => {
+            const object = new Intern("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getId()).toEqual(object.id);
+        });
+    });
+
+    describe("getRole", () => {
+        it("Will get the role of the object", () => {
+            const object = new Intern("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getRole()).toEqual("Intern");
+        });
+    });
 });

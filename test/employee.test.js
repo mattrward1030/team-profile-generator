@@ -1,47 +1,54 @@
 const Employee = require("../lib/Employee");
 
-test("Can instantiate Employee instance", () => {
-    const object = new Employee();
-    expect(typeof (object)).toBe("object");
-});
 
-test("Can set name via constructor arguments", () => {
-    const name = "Morgan";
-    const object = new Employee(name);
-    expect(object.name).toBe(name);
-});
+describe("Employee", () => {
+    describe("Initialization", () => {
+        it("Can instantiate Employee object", () => {
+            const object = new Employee();
+            expect(typeof (object)).toBe("object");
+        });
 
-test("Can set id via constructor argument", () => {
-    const testValue = "test@test.com";
-    const object = new Employee("Morgan", testValue);
-    expect(object.email).toBe(testValue);
-});
+        it("Will set 'name', 'id' and 'email' when instantiated", () => {
+            const name = "Morgan";
+            const email = "Morgan@test.com";
+            const id = 1;
+            const object = new Employee(name, email, id)
 
-test("Can set email via constructor argument", () => {
-    const testValue = 1;
-    const object = new Employee("Morgan", "test@test.com", testValue);
-    expect(object.id).toBe(testValue);
-});
+            expect(object.name).toEqual(name);
+            expect(object.email).toEqual(email);
+            expect(object.id).toEqual(id);
 
-test("Can get name via getName()", () => {
-    const testValue = "Morgan";
-    const e = new Employee(testValue);
-    expect(e.getName()).toBe(testValue);
-});
+        });
+    });
 
-test("Can get email via getEmail()", () => {
-    const testValue = "test@test.com";
-    const object = new Employee("Morgan", testValue);
-    expect(object.getEmail()).toBe(testValue);
-});
-test("Can get id via getId()", () => {
-    const testValue = 1;
-    const object = new Employee("Morgan", "test@test.com", testValue);
-    expect(object.getId()).toBe(testValue);
-});
+    describe("getName", () => {
+        it("Will get the name of the object", () => {
+            const object = new Employee("Morgan", "Morgan@test.com", 1)
 
-test("getRole() should return \"Employee\"", () => {
-    const testValue = "Employee";
-    const object = new Employee("Morgan", "test@test.com", 1);
-    expect(object.getRole()).toBe(testValue);
+            expect(object.getName()).toEqual(object.name);
+        });
+    });
+
+    describe("getEmail", () => {
+        it("Will get the email of the object", () => {
+            const object = new Employee("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getEmail()).toEqual(object.email);
+        });
+    });
+    describe("getID", () => {
+        it("Will get the id of the object", () => {
+            const object = new Employee("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getId()).toEqual(object.id);
+        });
+    });
+
+    describe("getRole", () => {
+        it("Will get the role of the object", () => {
+            const object = new Employee("Morgan", "Morgan@test.com", 1)
+
+            expect(object.getRole()).toEqual("Employee");
+        });
+    });
 });
