@@ -13,12 +13,12 @@ const init = () => {
     inquirer.prompt([
         {
             message: "What is the name of your team?",
-            name: "teamname"
+            name: "teamName"
         }
     ])
 
         .then((data) => {
-            const team = data.teamname
+            const team = data.teamName
             teamArray.push(team)
             addManager();
         })
@@ -90,7 +90,7 @@ const addTeamMates = () => {
             {
                 type: "list",
                 message: "Does your team contain other members?",
-                choices: ["We have an engineer", "We have an unpaid intern", "This is a one person opperation"],
+                choices: ["We have an engineer", "We have an unpaid intern", "Done adding team mates"],
                 name: "newTeamMate"
 
             }
@@ -231,6 +231,78 @@ const addIntern = () => {
 
 const makeTeam = () => {
     console.log("Your team is complete")
+    for (var i = 0; i < teamArray.length; i++) {
+
+        `
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Profile-generator</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <h1>${data.teamName}</h1>
+    </div>
+    <div class="conatiner">
+        <div class="card-group">
+            <div class="card">
+                <h1>${data.name[i]}</h1>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+                    </p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/JS/script.js"></script>
+</body>
+
+</html>
+`
+    }
+    fs.writeFile(`./generated.html`, function (err) {
+
+    })
 }
+
 
 init()
