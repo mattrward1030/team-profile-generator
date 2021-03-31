@@ -40,6 +40,20 @@ const addManager = () => {
                 }
             },
 
+
+            {
+                type: "input",
+                message: "Please enter the id number",
+                name: "id",
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter an id number!")
+                    }
+                    return true;
+                }
+            },
+
+
             {
                 type: "input",
                 message: "Please enter the manager's email address",
@@ -68,8 +82,8 @@ const addManager = () => {
 
         .then((data) => {
             const name = data.name
+            const id = data.id
             const email = data.email
-            const id = 1
             const officeNum = data.officeNum
             const teamMate = new Manager(name, email, id, officeNum)
             teamArray.push(teamMate)
@@ -104,7 +118,7 @@ const addTeamMates = () => {
                 case "We have an unpaid intern":
                     addIntern();
                     break;
-                case "This is a one person opperation":
+                case "Done adding team mates":
                     makeTeam();
                     break;
             }
@@ -122,6 +136,17 @@ const addEngineer = () => {
                 validate: function (answer) {
                     if (answer.length < 1) {
                         return console.log("Need to enter a name!")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: "input",
+                message: "Please enter the id number",
+                name: "id",
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter an id number!")
                     }
                     return true;
                 }
@@ -151,12 +176,14 @@ const addEngineer = () => {
                 }
             },
 
+
+
         ])
 
         .then((data) => {
             const name = data.name
+            const id = data.id
             const email = data.email
-            const id = teamArray.length + 1
             const github = data.github
             const teamMate = new Engineer(name, email, id, github)
             teamArray.push(teamMate)
@@ -188,6 +215,18 @@ const addIntern = () => {
 
             {
                 type: "input",
+                message: "Please enter the id number",
+                name: "id",
+                validate: function (answer) {
+                    if (answer.length < 1) {
+                        return console.log("Need to enter an id number!")
+                    }
+                    return true;
+                }
+            },
+
+            {
+                type: "input",
                 message: "Please enter the Intern's email address",
                 name: "email",
                 validate: function (answer) {
@@ -210,12 +249,14 @@ const addIntern = () => {
                 }
             },
 
+
+
         ])
 
         .then((data) => {
             const name = data.name
+            const id = data.id
             const email = data.email
-            const id = teamArray.length + 1
             const school = data.school
             const teamMate = new Intern(name, email, id, school)
             teamArray.push(teamMate)
@@ -231,9 +272,9 @@ const addIntern = () => {
 
 const makeTeam = () => {
     console.log("Your team is complete")
-    for (var i = 0; i < teamArray.length; i++) {
 
-        `
+    const newHtml = []
+    const htmlPlate = `
     <!DOCTYPE html>
 <html lang="en">
 
@@ -244,65 +285,78 @@ const makeTeam = () => {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <title>Profile-generator</title>
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
-        <h1>${data.teamName}</h1>
+    <div class="jumbotron jumbotron-fluid card text-white bg-danger mb-3 text-center">
+        <h1>The Stacked Team</h1>
     </div>
-    <div class="conatiner">
-        <div class="card-group">
-            <div class="card">
-                <h1>${data.name[i]}</h1>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
+    <div class="container">
+    <div class="card-deck">
+    
+    `
+
+    newHtml.push(htmlPlate);
+
+    for (var i = 1; i < teamArray.length; i++) {
+        let obj = `
+        <div class="card  border-primary mb-3">
+            <div class="card-body">
+            <div class="card-header text-white bg-primary mb-3">
+            <h1>${teamArray[i].name}</h1>
+            <h3>${teamArray[i].title}</h3>
             </div>
-            <div class="card">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal height
-                        action.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"">Employee ID: ${teamArray[i].id}</li>
+                <li class="list-group-item"">Email: <a href="mailto:${teamArray[i].email}">${teamArray[i].email}</a></li>
+
+        `
+        if (teamArray[i].officeNum) {
+            obj += `
+            <li class="list-group-item">Office number:${teamArray[i].officeNum}</li>
+            `
+        }
+        if (teamArray[i].github) {
+            obj += `
+            <li class="list-group-item">GitHub: <a href="https://github.com/${teamArray[i].github}">${teamArray[i].github}</a></li>
+            `
+        }
+        if (teamArray[i].school) {
+            obj += `
+            <li class="list-group-item">School: ${teamArray[i].school}</li>
+            `
+        }
+        obj += `
+        </ul>
         </div>
-
-
-
-
+        </div>
+        `
+        newHtml.push(obj)
+    }
+    const endPage = `
+    
     </div>
-
+    </div>
+    </div>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/JS/script.js"></script>
-</body>
+    </body>
+    </html>
+    `
+    newHtml.push(endPage);
 
-</html>
-`
-    }
-    fs.writeFile(`./generated.html`, function (err) {
+    fs.writeFile(`./generated-html/${teamArray[0]}.html`, newHtml.join(""), function (err) {
 
     })
+
 }
+
+
 
 
 init()
