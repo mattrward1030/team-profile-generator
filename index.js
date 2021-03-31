@@ -320,7 +320,7 @@ const makeTeam = () => {
         }
         if (teamArray[i].github) {
             obj += `
-            <li class="list-group-item">GitHub: <a href="https://github.com/${teamArray[i].github}">${teamArray[i].github}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${teamArray[i].github}" target="_blank">${teamArray[i].github}</a></li>
             `
         }
         if (teamArray[i].school) {
