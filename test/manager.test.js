@@ -25,7 +25,7 @@ describe("Manager", () => {
 
     describe("getName", () => {
         it("Will get the name of the object", () => {
-            const object = new Manager("Morgan", "Morgan@test.com", 1)
+            const object = new Manager("Morgan", "Morgan@test.com", 1, 2)
 
             expect(object.getName()).toEqual(object.name);
         });
@@ -33,14 +33,14 @@ describe("Manager", () => {
 
     describe("getEmail", () => {
         it("Will get the email of the object", () => {
-            const object = new Manager("Morgan", "Morgan@test.com", 1)
+            const object = new Manager("Morgan", "Morgan@test.com", 1, 2)
 
             expect(object.getEmail()).toEqual(object.email);
         });
     });
     describe("getID", () => {
         it("Will get the id of the object", () => {
-            const object = new Manager("Morgan", "Morgan@test.com", 1)
+            const object = new Manager("Morgan", "Morgan@test.com", 1, 2)
 
             expect(object.getId()).toEqual(object.id);
         });
@@ -54,7 +54,7 @@ describe("Manager", () => {
     });
     describe("getRole", () => {
         it("Will get the role of the object", () => {
-            const object = new Manager("Morgan", "Morgan@test.com", 1)
+            const object = new Manager("Morgan", "Morgan@test.com", 1, 2)
 
             expect(object.getRole()).toEqual("Manager");
         });

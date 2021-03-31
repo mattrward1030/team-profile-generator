@@ -8,7 +8,7 @@ describe("Employee", () => {
             expect(typeof (object)).toBe("object");
         });
 
-        it("Will set 'name', 'id' and 'email' when instantiated", () => {
+        it("Will set 'name', 'email' and 'id' when instantiated", () => {
             const name = "Morgan";
             const email = "Morgan@test.com";
             const id = 1;
