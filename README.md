@@ -15,7 +15,7 @@ If you want to use this program, first do a git clone as previously described. O
 ## Finished project
  If you would like a demo of this program, visit https://youtu.be/uTOiH5YuPFk
 
-<img src="./main/images/team-profile-screenshot.png" alt="screenshot of completed team profile web page">
+<img src="./main/images/Team-profile-screenshot.png" alt="screenshot of completed team profile web page">
 
 ## Features
 <ul>
